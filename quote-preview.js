@@ -3,6 +3,7 @@
   const btnPdf = document.getElementById("btnDownloadPdf");
   const btnEmail = document.getElementById("btnSendEmail");
   const btnAiEmail = document.getElementById("btnAiEmail");
+  const btnShare = document.getElementById("btnSharePdf");
 
   const quote = loadQuote();
   const computed = calculateTotals(quote);
@@ -210,6 +211,66 @@
 
     const safeCompany = (computed.company.name || "teklif").replace(/[^\w\-]+/g, "-");
     pdf.save(`${safeCompany}-teklif.pdf`);
+    try {
+      const arr = JSON.parse(localStorage.getItem("quoteflow:analytics") || "[]");
+      arr.push({ name: "pdf_generated", ts: Date.now() });
+      localStorage.setItem("quoteflow:analytics", JSON.stringify(arr));
+    } catch {}
+  }
+
+  async function buildPdfBlob() {
+    if (!root) return null;
+    await generatePdfLibs();
+    const canvas = await html2canvas(root, { scale: 2, useCORS: true, allowTaint: true, backgroundColor: "#ffffff" });
+    const pdf = new window.jspdf.jsPDF("p", "mm", "a4");
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const margin = 10;
+    const imgWidth = pageWidth - margin * 2;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    if (imgHeight <= pageHeight - margin * 2) {
+      const y = (pageHeight - imgHeight) / 2;
+      pdf.addImage(canvas.toDataURL("image/png"), "PNG", margin, y, imgWidth, imgHeight);
+    } else {
+      const sliceHeightPx = Math.floor((pageHeight - margin * 2) * (canvas.height / imgHeight));
+      let renderedPx = 0;
+      while (renderedPx < canvas.height) {
+        const sliceCanvas = document.createElement("canvas");
+        sliceCanvas.width = canvas.width;
+        sliceCanvas.height = Math.min(sliceHeightPx, canvas.height - renderedPx);
+        const ctx = sliceCanvas.getContext("2d");
+        ctx.drawImage(canvas, 0, renderedPx, canvas.width, sliceCanvas.height, 0, 0, sliceCanvas.width, sliceCanvas.height);
+        const sliceImgData = sliceCanvas.toDataURL("image/png");
+        if (renderedPx > 0) pdf.addPage();
+        const sliceImgHeight = (sliceCanvas.height * imgWidth) / sliceCanvas.width;
+        pdf.addImage(sliceImgData, "PNG", margin, margin, imgWidth, sliceImgHeight);
+        renderedPx += sliceCanvas.height;
+      }
+    }
+    const blob = pdf.output("blob");
+    return new File([blob], `${(computed.company.name || "teklif").replace(/[^\w\-]+/g, "-")}-teklif.pdf`, { type: "application/pdf" });
+  }
+
+  async function generatePdfLibs() {
+    async function ensureLibs() {
+      function load(src) {
+        return new Promise((resolve, reject) => {
+          const s = document.createElement("script");
+          s.src = src;
+          s.async = true;
+          s.onload = resolve;
+          s.onerror = reject;
+          document.head.appendChild(s);
+        });
+      }
+      if (typeof html2canvas === "undefined") {
+        await load("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js");
+      }
+      if (typeof window.jspdf === "undefined") {
+        await load("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");
+      }
+    }
+    await ensureLibs().catch(() => {});
   }
 
   function openEmailDraft() {
@@ -275,6 +336,22 @@
         openEmailDraft();
       } finally {
         btnAiEmail.disabled = false;
+      }
+    });
+  }
+
+  if (btnShare) {
+    btnShare.addEventListener("click", async () => {
+      try {
+        const file = await buildPdfBlob();
+        if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({ files: [file], title: "Teklif PDF", text: "Teklif PDF'i ekte." });
+        } else {
+          await generatePdf();
+          alert("Tarayıcınız dosya paylaşımını desteklemiyor. PDF indirildi, e‑posta ile ek olarak gönderin.");
+        }
+      } catch (e) {
+        alert("Paylaşım sırasında hata oluştu.");
       }
     });
   }

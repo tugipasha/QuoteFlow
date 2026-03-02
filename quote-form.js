@@ -63,6 +63,8 @@
     userWebsite: document.getElementById("userWebsite"),
     btnSaveUserProfile: document.getElementById("btnSaveUserProfile"),
     btnFillCompanyFromUser: document.getElementById("btnFillCompanyFromUser"),
+    btnGotoPreview: document.getElementById("btnGotoPreview"),
+    validationSummary: document.getElementById("validationSummary"),
   };
 
   function bindInitialValues() {
@@ -387,6 +389,20 @@
     renderItems();
     updateTotalsUI();
     renderPreview();
+    updateValidationUI();
+  }
+
+  function updateValidationUI() {
+    if (!window.QuoteFlowValidation || !els.validationSummary) return;
+    const errs = window.QuoteFlowValidation.getValidationErrors(quote);
+    if (errs.length) {
+      els.validationSummary.style.display = "block";
+      els.validationSummary.innerHTML = "<strong>Düzenlenmesi gerekenler:</strong><br/>" + errs.map((e) => "- " + e).join("<br/>");
+      if (els.btnGotoPreview) els.btnGotoPreview.classList.add("btn-disabled");
+    } else {
+      els.validationSummary.style.display = "none";
+      if (els.btnGotoPreview) els.btnGotoPreview.classList.remove("btn-disabled");
+    }
   }
 
   function wireEvents() {
@@ -596,11 +612,21 @@
 
     if (els.btnResetQuote) {
       els.btnResetQuote.addEventListener("click", () => {
-        if (!window.confirm("Bu teklifi sıfırlamak istediğine emin misin?")) return;
+        const confirmReset = window.confirm("Bu teklifi sıfırlamak istediğine emin misin?");
+        if (!confirmReset) return;
+        const backup = JSON.stringify(quote);
         const fresh = createEmptyQuote();
         const stored = saveQuote(fresh);
         Object.assign(quote, stored);
         bindInitialValues();
+        showSnackbar("Teklif sıfırlandı.", "Geri al", () => {
+          try {
+            const prev = JSON.parse(backup);
+            const restored = saveQuote(prev);
+            Object.assign(quote, restored);
+            bindInitialValues();
+          } catch {}
+        });
       });
     }
 
@@ -611,6 +637,17 @@
         if (key && window.QuoteFlowAI && window.QuoteFlowAI.setApiKey) {
           window.QuoteFlowAI.setApiKey(key);
           if (els.aiStatus) els.aiStatus.textContent = "API anahtarı kaydedildi.";
+        }
+      });
+    }
+    if (els.btnGotoPreview) {
+      els.btnGotoPreview.addEventListener("click", (e) => {
+        if (!window.QuoteFlowValidation) return;
+        const errs = window.QuoteFlowValidation.getValidationErrors(quote);
+        if (errs.length) {
+          e.preventDefault();
+          updateValidationUI();
+          showSnackbar("Önizleme için zorunlu alanları tamamlayın.");
         }
       });
     }
@@ -630,6 +667,7 @@
             quote.items = items;
             persistAndRender();
             if (els.aiStatus) els.aiStatus.textContent = "AI önerileri eklendi.";
+            logEvent("ai_suggest");
           } else {
             if (els.aiStatus) els.aiStatus.textContent = "Öneri alınamadı.";
           }
@@ -654,6 +692,7 @@
             quote.items = items;
             persistAndRender();
             if (els.aiStatus) els.aiStatus.textContent = "AI optimizasyonu uygulandı.";
+            logEvent("ai_refine");
           } else {
             if (els.aiStatus) els.aiStatus.textContent = "Optimizasyon yapılamadı.";
           }
@@ -681,6 +720,7 @@
         if (window.QuoteFlowAI && window.QuoteFlowAI.setProfile) {
           window.QuoteFlowAI.setProfile(profile);
           if (els.aiStatus) els.aiStatus.textContent = "AI profili kaydedildi.";
+          logEvent("ai_profile_save");
         }
       });
     }
@@ -700,6 +740,7 @@
           window.QuoteFlowAI.setProfile(preset);
         }
         if (els.aiStatus) els.aiStatus.textContent = "Freelancer profili uygulandı.";
+        logEvent("ai_profile_freelancer");
       });
     }
     if (els.btnInfluencerPreset) {
@@ -763,6 +804,7 @@
         if (window.QuoteFlowUser && window.QuoteFlowUser.setProfile) {
           window.QuoteFlowUser.setProfile(profile);
           if (els.aiStatus) els.aiStatus.textContent = "Kullanıcı profili kaydedildi.";
+          logEvent("user_profile_save");
         }
       });
     }
@@ -790,6 +832,7 @@
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
+        logEvent("export_json");
       });
     }
     if (els.btnImportQuote && els.fileImportQuote) {
@@ -810,8 +853,49 @@
           }
         };
         reader.readAsText(file, "utf-8");
+        logEvent("import_json");
       });
     }
+  }
+
+  function showSnackbar(text, actionLabel, action) {
+    let bar = document.getElementById("snackbar");
+    if (!bar) {
+      bar = document.createElement("div");
+      bar.id = "snackbar";
+      bar.className = "snackbar";
+      document.body.appendChild(bar);
+    }
+    bar.innerHTML = "";
+    const span = document.createElement("span");
+    span.textContent = text || "";
+    bar.appendChild(span);
+    if (actionLabel && action) {
+      const btn = document.createElement("button");
+      btn.className = "btn btn-ghost";
+      btn.style.marginLeft = "0.5rem";
+      btn.textContent = actionLabel;
+      btn.addEventListener("click", () => {
+        action();
+        hideSnackbar();
+      });
+      bar.appendChild(btn);
+    }
+    bar.style.display = "flex";
+    setTimeout(hideSnackbar, 4500);
+  }
+  function hideSnackbar() {
+    const bar = document.getElementById("snackbar");
+    if (bar) bar.style.display = "none";
+  }
+
+  function logEvent(name) {
+    try {
+      const raw = localStorage.getItem("quoteflow:analytics") || "[]";
+      const arr = JSON.parse(raw);
+      arr.push({ name, ts: Date.now() });
+      localStorage.setItem("quoteflow:analytics", JSON.stringify(arr));
+    } catch {}
   }
 
   bindInitialValues();

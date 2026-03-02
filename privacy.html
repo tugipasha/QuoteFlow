@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gizlilik / GDPR – QuoteFlow</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-landing">
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a href="index.html" class="logo-mark">
+        <span class="logo-icon">QF</span>
+        <span class="logo-text">QuoteFlow</span>
+      </a>
+    </div>
+  </header>
+  <main class="section">
+    <div class="container section-inner">
+      <header class="section-header">
+        <h2>Gizlilik / GDPR</h2>
+        <p>QuoteFlow, tarayıcı içinde çalışan bir MVP’dir. Veriler cihazınızda kalır.</p>
+      </header>
+      <div class="card">
+        <h3>Veri Saklama</h3>
+        <p>Teklif içerikleri tarayıcının LocalStorage alanında tutulur. Sunucuya gönderilmez.</p>
+        <h3>Çerezler</h3>
+        <p>Kalıcı çerez kullanılmaz. Sadece LocalStorage vardır.</p>
+        <h3>AI Çağrıları</h3>
+        <p>OpenRouter anahtarı kullanıcı tarafından girilir ve tarayıcıda saklanır; üretim için proxy önerilir.</p>
+        <h3>Analitik</h3>
+        <p>Geliştirme amaçlı basit yerel olay kaydı bulunur; cihazınızdan dışarı çıkmaz.</p>
+        <h3>Haklarınız</h3>
+        <p>LocalStorage temizleyerek tüm verileri silebilirsiniz. Export/Import ile veri taşınabilir.</p>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> QuoteFlow.</span>
+      <span class="footer-tagline">“Veriler yerelde, kontrol sizde.”</span>
+    </div>
+  </footer>
+  <script src="main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+    });
+  </script>
+</body>
+</html>

@@ -943,6 +943,11 @@ textarea::placeholder {
   background: #f1f5f9;
 }
 
+.btn-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
 .pill-neutral {
   background: #e5e7eb;
   color: #4b5563;
@@ -1049,6 +1054,22 @@ textarea::placeholder {
   align-self: flex-start;
   background: #f8fafc;
   border: 1px solid #e5e7eb;
+}
+
+.snackbar {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 18px;
+  z-index: 35;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  padding: 0.45rem 0.75rem;
+  display: none;
+  align-items: center;
+  box-shadow: var(--shadow-soft);
+  font-size: 0.85rem;
 }
 
 .intro-overlay {
