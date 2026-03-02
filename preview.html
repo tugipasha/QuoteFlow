@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teklif Önizleme &amp; PDF – QuoteFlow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-preview">
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a href="index.html" class="logo-mark">
+        <span class="logo-icon">QF</span>
+        <span class="logo-text">QuoteFlow</span>
+      </a>
+      <div class="nav-links">
+        <a href="create.html">Formu düzenle</a>
+      </div>
+      <span class="pill pill-neutral">Frontend MVP • PDF hazır</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="preview-page-header">
+        <div>
+          <h1 class="preview-page-title">Teklif Önizleme</h1>
+          <p class="preview-page-subtitle">
+            Aşağıdaki görünüm PDF ile neredeyse aynı. İstersen form sayfasına dönüp düzenleyebilirsin.
+          </p>
+        </div>
+        <div class="preview-page-actions">
+          <a href="create.html" class="btn btn-secondary">Formu düzenle</a>
+          <button type="button" id="btnDownloadPdf" class="btn btn-primary">PDF Oluştur</button>
+          <button type="button" id="btnSendEmail" class="btn btn-ghost">E-posta ile gönder</button>
+          <button type="button" id="btnAiEmail" class="btn btn-ghost">AI ile e-posta yaz</button>
+        </div>
+      </div>
+
+      <section class="card">
+        <div id="quotePreview" class="preview-paper">
+          <div class="empty-state">
+            <strong>Henüz teklif verisi yok.</strong><br />
+            Önce <a href="create.html" style="color:#2563eb; text-decoration:underline;">Teklif Oluştur</a> sayfasında formu doldurun.
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> QuoteFlow.</span>
+      <span class="footer-tagline">“Teklif hazırlama süresini %80 azalt, profesyonel görün.”</span>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaLBxg8qMnlV9iddUM9Q9craEw0loMZEvUyMjyHfFngWiEYUvY7JQKjI5zm2a1ONB/UZrU+Q06h7r5TudBkZg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-Ykqv34JJmYlFxH3Prbr30YIOCwVDDDeWGPAHDq6cHruM3aMcMBXNte1qNbfXDnpa9eKJeNEqXWiwxgQhGkqU9Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="main.js"></script>
+  <script src="quote-preview.js"></script>
+  <script src="ai.js"></script>
+  <script src="support-chat.js"></script>
+</body>
+</html>
+

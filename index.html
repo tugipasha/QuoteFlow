@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuoteFlow – 30 Saniyede Profesyonel Teklif PDF’i</title>
+  <meta name="description" content="QuoteFlow, KOBİ ve freelancer’lar için tek formdan profesyonel teklif PDF’i oluşturan mikro SaaS aracı. Teklif hazırlama süresini %80 azalt, profesyonel görün." />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="QuoteFlow – 30 Saniyede Profesyonel Teklif PDF’i" />
+  <meta property="og:description" content="Tek form doldur, otomatik hesapla, PDF’e dönüştür ve müşterinle paylaş. Hesap yok, karmaşa yok." />
+  <meta property="og:image" content="https://example.com/quoteflow-hero.png" />
+  <meta property="og:locale" content="tr_TR" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-landing">
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <div class="logo-mark">
+        <span class="logo-icon">QF</span>
+        <span class="logo-text">QuoteFlow</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#features">Özellikler</a>
+        <a href="#who">Kimler için?</a>
+        <a href="#how-it-works">Nasıl Çalışır?</a>
+        <a href="#pricing">Fiyatlandırma</a>
+        <a href="#enterprise">Kurumsal</a>
+        <a href="#faq">SSS</a>
+      </nav>
+      <a href="create.html" class="btn btn-primary">Hemen Oluştur</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <span class="pill pill-success">Mikro SaaS • KOBİ &amp; Freelancer</span>
+          <h1>30 saniyede <span class="text-gradient">profesyonel teklif PDF’i</span> oluştur.</h1>
+          <p class="hero-subtitle">
+            Tek form doldur, otomatik hesapla, tek tıkla PDF’e dönüştür ve paylaş.
+            Backend yok, hesap yok, karmaşa yok.
+          </p>
+          <ul class="hero-benefits">
+            <li><span class="check">✓</span> Teklif hazırlama süresini <strong>%80 azalt</strong></li>
+            <li><span class="check">✓</span> Logolu, kurumsal görünümlü PDF</li>
+            <li><span class="check">✓</span> KDV hesaplama ve toplamlar otomatik</li>
+          </ul>
+          <div class="hero-actions">
+            <a href="create.html" class="btn btn-primary btn-lg">Hemen Teklif Oluştur</a>
+            <button type="button" class="btn btn-ghost" onclick="scrollToDemo()">Demo PDF’i Gör</button>
+          </div>
+          <p class="hero-meta">Kaydolma yok. Verilerin tarayıcında saklanır (LocalStorage).</p>
+        </div>
+        <div class="hero-visual">
+          <div class="card preview-card" id="demo-preview">
+            <div class="preview-header">
+              <div class="preview-company">
+                <div class="preview-logo-circle">Q</div>
+                <div>
+                  <div class="preview-company-name">QuoteFlow Studio</div>
+                  <div class="preview-company-contact">info@quoteflow.app • +90 555 000 00 00</div>
+                </div>
+              </div>
+              <div class="preview-meta">
+                <div class="preview-label">Teklif #QF-2026-001</div>
+                <div class="preview-date">02.03.2026</div>
+              </div>
+            </div>
+            <div class="preview-client">
+              <div class="muted-label">Müşteri</div>
+              <div class="preview-client-name">Acme Dijital A.Ş.</div>
+              <div class="preview-client-contact">İlgili: Ali Yılmaz</div>
+            </div>
+            <table class="preview-table">
+              <thead>
+                <tr>
+                  <th>Hizmet</th>
+                  <th>Birim Fiyat</th>
+                  <th>Adet</th>
+                  <th>Tutar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Web Tasarım Paketi</td>
+                  <td>₺5.000</td>
+                  <td>1</td>
+                  <td>₺5.000</td>
+                </tr>
+                <tr>
+                  <td>Bakım &amp; Destek (12 Ay)</td>
+                  <td>₺750</td>
+                  <td>12</td>
+                  <td>₺9.000</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="preview-totals">
+              <div class="row">
+                <span>Ara Toplam</span>
+                <span>₺14.000</span>
+              </div>
+              <div class="row">
+                <span>KDV (%20)</span>
+                <span>₺2.800</span>
+              </div>
+              <div class="row total-row">
+                <span>Genel Toplam</span>
+                <span>₺16.800</span>
+              </div>
+            </div>
+            <div class="preview-footer">
+              <div class="muted-label">Notlar</div>
+              <p class="preview-note">Bu teklif 15 gün geçerlidir. Tüm fiyatlar TL cinsindendir.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section bg-subtle">
+      <div class="container section-inner">
+        <header class="section-header">
+          <h2>Teklif hazırlama sürecini hafiflet.</h2>
+          <p>Word şablonları, Excel hesapları ve bozulmuş PDF’ler yerine, tek amaçlı bir teklif motoru.</p>
+        </header>
+        <div class="feature-grid">
+          <div class="card feature-card">
+            <div class="icon-badge">⚡</div>
+            <h3>Tek Form, Tüm Teklif</h3>
+            <p>Firma, müşteri ve hizmet kalemleri tek ekranda. Ara toplam, KDV ve genel toplam otomatik hesaplanır.</p>
+          </div>
+          <div class="card feature-card">
+            <div class="icon-badge">📄</div>
+            <h3>Kurumsal PDF Çıktı</h3>
+            <p>Logon, iletişim bilgilerin ve net tablo yapısıyla kurumsal görünen PDF teklifleri saniyeler içinde indir.</p>
+          </div>
+          <div class="card feature-card">
+            <div class="icon-badge">📧</div>
+            <h3>Tek Tıkla Paylaşım</h3>
+            <p>PDF’i indir veya e-posta taslağıyla paylaş. Ekstra yazılım yok.</p>
+          </div>
+          <div class="card feature-card">
+            <div class="icon-badge">🧠</div>
+            <h3>Backend’siz, Hesapsız</h3>
+            <p>Verilerin tarayıcında (LocalStorage). Kullanıcı hesabı derdi yok.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="who" class="section">
+      <div class="container section-inner">
+        <header class="section-header">
+          <h2>Kimin için tasarlandı?</h2>
+          <p>Haftada birden fazla teklif gönderen ama ağır CRM’lere ihtiyaç duymayan ekipler.</p>
+        </header>
+        <div class="feature-grid">
+          <div class="card feature-card">
+            <div class="icon-badge">👨‍💻</div>
+            <h3>Freelancer’lar</h3>
+            <p>Web tasarımcılar, yazılımcılar, danışmanlar… Her proje için dakika içinde yeni teklif PDF’i.</p>
+          </div>
+          <div class="card feature-card">
+            <div class="icon-badge">🏢</div>
+            <h3>Küçük Ajanslar</h3>
+            <p>Ajans şablonunu bir kez doldur, ekipteki herkes aynı formatta, hatasız teklif göndersin.</p>
+          </div>
+          <div class="card feature-card">
+            <div class="icon-badge">💼</div>
+            <h3>KOBİ Satış Ekipleri</h3>
+            <p>Excel’de fiyat hesaplayıp Word’e yapıştırma dönemi bitti. Tek ekrandan, tek tıkla PDF.</p>
+          </div>
+          <div class="card feature-card">
+            <div class="icon-badge">🧾</div>
+            <h3>Hizmet Firmaları</h3>
+            <p>Bakım, danışmanlık, eğitim, ajans hizmetleri… Adet ve birim fiyat gir, gerisini QuoteFlow hesaplasın.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="section">
+      <div class="container section-inner">
+        <header class="section-header">
+          <h2>3 adımda teklif PDF’in hazır.</h2>
+        </header>
+        <ol class="steps">
+          <li>
+            <span class="step-index">1</span>
+            <div>
+              <h3>Formu doldur</h3>
+              <p>Firma ve müşteri bilgilerini gir, hizmet kalemlerini ekle.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-index">2</span>
+            <div>
+              <h3>Önizlemeyi kontrol et</h3>
+              <p>Gerçek zamanlı olarak PDF görünümüne en yakın taslağı gör.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-index">3</span>
+            <div>
+              <h3>PDF oluştur &amp; paylaş</h3>
+              <p>Tek tıkla PDF indir veya e-posta ile gönder.</p>
+            </div>
+          </li>
+        </ol>
+        <div class="steps-cta">
+          <a href="create.html" class="btn btn-primary btn-lg">Şimdi Ücretsiz Dene</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section bg-subtle">
+      <div class="container section-inner">
+        <header class="section-header">
+          <h2>Basit fiyatlandırma. Önce dene, sonra karar ver.</h2>
+          <p>Şu an MVP aşamasında. Araç ücretsiz; geri bildirim karşılığında kullanabilirsin.</p>
+        </header>
+        <div class="feature-grid">
+          <div class="card feature-card">
+            <div class="icon-badge">🧪</div>
+            <h3>MVP Kullanımı</h3>
+            <p>Limitsiz teklif, limitsiz PDF. Sadece tarayıcında çalışır, kayıt gerekmez.</p>
+          </div>
+          <div class="card feature-card">
+            <div class="icon-badge">🚀</div>
+            <h3>Gelecek Sürüm</h3>
+            <p>Kayıtlı müşteri listeleri, çoklu teklif şablonları ve ekip kullanımı için planlama yapılıyor.</p>
+          </div>
+          <div class="card feature-card">
+            <div class="icon-badge">🤝</div>
+            <h3>Ajans / White-label</h3>
+            <p>Aracı satın alıp kendi markanla sunmak istersen, özelleştirme için iletişime geçebilirsin.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="enterprise" class="section">
+      <div class="container section-inner">
+        <header class="section-header">
+          <h2>Kurumsal / White‑label lisans.</h2>
+          <p>Markanıza uygun tema, özel PDF şablonları ve ekip lisansı ile satın alın.</p>
+        </header>
+        <div class="feature-grid">
+          <div class="card feature-card">
+            <div class="icon-badge">🎨</div>
+            <h3>Tema &amp; PDF Şablonu</h3>
+            <p>Kurumsal renkler, fontlar ve teklif numaralandırma düzenleri. Logonuzla tam uyum.</p>
+          </div>
+          <div class="card feature-card">
+            <div class="icon-badge">👥</div>
+            <h3>Ekip Kullanımı</h3>
+            <p>Kayıtlı müşteri listeleri ve paylaşılan şablonlar. Tek formatta teklif kültürü.</p>
+          </div>
+          <div class="card feature-card">
+            <div class="icon-badge">🔒</div>
+            <h3>Gizlilik</h3>
+            <p>Veriler tarayıcıda. İsterseniz kendi sunucunuz üzerinden proxy ile çağrı.</p>
+          </div>
+          <div class="card feature-card">
+            <div class="icon-badge">🤝</div>
+            <h3>Lisans &amp; Destek</h3>
+            <p>Eğitim, kurulum ve özelleştirme paketleri. White‑label marka kullanımı.</p>
+          </div>
+        </div>
+        <div class="steps-cta">
+          <a href="mailto:info@quoteflow.app?subject=Kurumsal%20Lisans%20Talebi&body=Merhaba,%20kurumsal%20lisans%20ve%20özelleştirme%20hakkında%20bilgi%20almak%20istiyoruz." class="btn btn-primary btn-lg">İletişime Geç</a>
+          <a href="create.html" class="btn btn-ghost">Demo’yu Deneyin</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section bg-subtle">
+      <div class="container section-inner">
+        <header class="section-header">
+          <h2>Sık sorulan sorular.</h2>
+        </header>
+        <div class="faq-grid">
+          <div class="faq-item card">
+            <h3>Verilerim nerede saklanıyor?</h3>
+            <p>
+              Tüm veriler tarayıcının <strong>LocalStorage</strong> alanında tutulur.
+              Sunucuya gönderilmez, hesap oluşturmanız gerekmez.
+            </p>
+          </div>
+          <div class="faq-item card">
+            <h3>Ücretli mi?</h3>
+            <p>
+              Şu anki sürüm, demo ve validasyon için tasarlanmış bir <strong>MVP</strong>, kullanımı ücretsiz.
+              İleride ek özellikler ve backend’li sürüm için ücretli planlar sunulabilir.
+            </p>
+          </div>
+          <div class="faq-item card">
+            <h3>PDF tasarımını özelleştirebilir miyim?</h3>
+            <p>
+              İlk sürümde tasarım sabit ve “iyi pratikler”e uygun.
+              Satın alanlar için özelleştirilebilir tema planlanıyor.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> QuoteFlow. Tüm hakları saklıdır.</span>
+      <span class="footer-tagline">“Teklif hazırlama süresini %80 azalt, profesyonel görün.”</span>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
+
